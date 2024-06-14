@@ -1,6 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './toastify-custom.css';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import React, { createContext, useEffect, useState } from 'react';
+import FAQ from './components/faq/FAQ';
 import {
   createBrowserRouter,
   HashRouter,
@@ -26,6 +30,8 @@ import SignUp from './pages/SignUp';
 import Cart from './pages/cart';
 import Wishlist from './pages/wishList';
 import './responsive.css';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
 
 // import data from './data';
 import { collection, doc, getDocs } from 'firebase/firestore';
@@ -34,6 +40,10 @@ import { db } from './firebase';
 import SellerForm from './pages/SellerRegistration';
 import SearchResults from './components/search/SearchResults';
 import GoToTop from './components/GoToTop/GoToTop';
+import Contributors from './pages/Contributors/Contributors';
+import { Account } from './components/AccountDetails/Account';
+import Contactus from './pages/Contactus/Contactus';
+import Blog from './pages/blog/blog';
 
 const MyContext = createContext();
 
@@ -260,6 +270,7 @@ function App() {
           )}
           <Header data={data.productData} />
           <Outlet />
+          <FAQ />
           <Footer />
           <GoToTop />
         </MyContext.Provider>
@@ -319,8 +330,32 @@ function App() {
           element: <AddProductForm />
         },
         {
+          path: '/my-account',
+          element: <Account />
+        },
+        {
           path: '/search',
           element: <SearchResults />
+        },
+        {
+          path: '/contributors',
+          element: <Contributors />
+        },
+        {
+          path: '/privacy-policy',
+          element: <PrivacyPolicy />
+        },
+        {
+          path: '/contact',
+          element: <Contactus />
+        },
+        {
+          path: '/blog',
+          element: <Blog />
+        },
+        {
+          path: '/termsandconditions',
+          element: <TermsAndConditions />
         },
         {
           path: '*',
@@ -333,6 +368,7 @@ function App() {
   return data && data.productData ? (
     <MyContext.Provider value={value}>
       <RouterProvider router={router} />
+      <ToastContainer />
     </MyContext.Provider>
   ) : (
     <div className="loader">

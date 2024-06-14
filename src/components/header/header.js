@@ -9,7 +9,7 @@ import IconCompare from '../../assets/images/icon-compare.svg';
 import IconHeart from '../../assets/images/icon-heart.svg';
 import IconCart from '../../assets/images/icon-cart.svg';
 import IconUser from '../../assets/images/icon-user.svg';
-
+import { toast } from 'react-toastify';
 import Button from '@mui/material/Button';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -31,6 +31,7 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import { Satellite } from '@mui/icons-material';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { cities } from './cities';
+import zIndex from '@mui/material/styles/zIndex';
 
 const Header = (props) => {
   const [isOpenDropDown, setisOpenDropDown] = useState(false);
@@ -73,6 +74,7 @@ const Header = (props) => {
     if (query.trim() !== '') {
       navigate(`/search?query=${query}`);
     }
+    searchInput.current.focus();
   };
 
   const handleKeyPress = (event) => {
@@ -120,6 +122,10 @@ const Header = (props) => {
     context.signOut();
     localStorage.setItem('userImage', '');
     history('/');
+    toast.success('Successfully signed out!', {
+      className: 'Toastify__toast--custom',
+      progressClassName: 'Toastify__progress-bar--custom'
+    });
   };
 
   const openSearch = () => {
@@ -244,7 +250,7 @@ const Header = (props) => {
                     />
                     <SearchIcon
                       className="searchIcon cursor"
-                      onClick={handleSearch}
+                      onClick={() => handleSearch()}
                     />
                   </div>
                 </div>
@@ -343,7 +349,15 @@ const Header = (props) => {
                             <ul className="dropdownMenu">
                               <li>
                                 <Button className="align-items-center">
-                                  <Person2OutlinedIcon /> My Account
+                                  <Link
+                                    to="/my-account"
+                                    style={{
+                                      textDecoration: 'none',
+                                      color: 'rgba(0, 0, 0, 0.7)'
+                                    }}
+                                  >
+                                    <Person2OutlinedIcon /> My Account
+                                  </Link>
                                 </Button>
                               </li>
                               <li>

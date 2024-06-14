@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import './nav.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import GridViewIcon from '@mui/icons-material/GridView';
@@ -115,7 +115,7 @@ const Nav = (props) => {
         <div className="container-fluid">
           <div className="row position-relative">
             {/*BROWSE ALL CATEGORY CODE */}
-            <div className="col-sm-2 part1 d-flex align-items-center justify-content-center">
+            <div className="col-sm-2 browBtn d-flex align-items-center justify-content-center">
               <nav>
                 <ul className="list list-inline">
                   <li className="list-inline-item position-static">
@@ -169,9 +169,15 @@ const Nav = (props) => {
                 <ul className="list list-inline mb-0">
                   <li className="list-inline-item">
                     <Button>
-                      <Link to={'/'} onClick={props.closeNav}>
+                      <NavLink
+                        to={'/'}
+                        onClick={props.closeNav}
+                        className={({ isActive }) =>
+                          isActive ? 'active-link' : ''
+                        }
+                      >
                         Home
-                      </Link>
+                      </NavLink>
                     </Button>
                   </li>
 
@@ -180,11 +186,7 @@ const Nav = (props) => {
                       <li className="list-inline-item" key={index}>
                         <Button onClick={() => openDropdownFun(index)}>
                           <a
-                            href={`${
-                              windowWidth > 992
-                                ? `/cat/${item.cat_name.toLowerCase()}`
-                                : '#'
-                            }`}
+                            href={`${windowWidth > 992 ? `#` : '#'}`}
                             onClick={() =>
                               sessionStorage.setItem(
                                 'cat',
@@ -202,6 +204,7 @@ const Nav = (props) => {
                             />
                           </a>
                         </Button>
+
                         {item.items.length !== 0 && (
                           <div
                             className={`dropdown_menu ${
@@ -244,14 +247,21 @@ const Nav = (props) => {
 
                   <li className="list-inline-item">
                     <Button onClick={props.closeNav}>
-                      <Link to={'/AboutUs'}>About</Link>
+                      <NavLink
+                        to={'/AboutUs'}
+                        className={({ isActive }) =>
+                          isActive ? 'active-link' : ''
+                        }
+                      >
+                        About
+                      </NavLink>
                     </Button>
                   </li>
 
                   <li className="list-inline-item position-static">
                     <Button onClick={() => setOpenMegaMenu(!openMegaMenu)}>
                       <Link>
-                        Shop{' '}
+                        Shop
                         <KeyboardArrowDownIcon
                           className={`${openMegaMenu === true && 'rotateIcon'}`}
                         />
@@ -328,13 +338,39 @@ const Nav = (props) => {
 
                                     </li> */}
                     <Button>
-                      <Link>Blog</Link>
+                      <NavLink
+                        to="/blog"
+                        className={({ isActive }) =>
+                          isActive ? 'active-link' : ''
+                        }
+                      >
+                        Blog
+                      </NavLink>
                     </Button>
                   </li>
 
                   <li className="list-inline-item">
                     <Button>
-                      <Link>Contact</Link>
+                      <NavLink
+                        to="/contact"
+                        className={({ isActive }) =>
+                          isActive ? 'active-link' : ''
+                        }
+                      >
+                        Contact
+                      </NavLink>
+                    </Button>
+                  </li>
+                  <li className="list-inline-item">
+                    <Button>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive ? 'active-link' : ''
+                        }
+                        to={'/contributors'}
+                      >
+                        Contributors
+                      </NavLink>
                     </Button>
                   </li>
                 </ul>
@@ -364,7 +400,7 @@ const Nav = (props) => {
                   <HeadphonesOutlinedIcon />
                 </span>
                 <div className="info ml-3">
-                  <h3 className="text-g mb-0">1900 - 888</h3>
+                <h4 class="bold-h4">1900-888</h4>
                   <p className="mb-0">24/7 Support Center</p>
                 </div>
               </div>
