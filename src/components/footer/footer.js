@@ -65,7 +65,7 @@ const Footer = () => {
         { link: '/privacy-policy', text: 'Privacy Policy' },
         { link: '/termsandconditions', text: 'Terms & Conditions' },
         { link: '#', text: 'Contact Us' },
-        { link: '#', text: 'Support Center' },
+        { link: '/faq', text: 'FAQ' },
         { link: '#', text: 'Careers' },
         { link: '#', text: 'Contributors' }
       ]
@@ -271,7 +271,7 @@ const Footer = () => {
 
               <div className="col-md-4 part3 part_3">
                 <div className="d-flex align-items-center">
-                  <h4>Follow Us</h4>
+                  <h4 className="m-0">Follow Us</h4>
                   <ul className="follow list list-inline d-inline">
                     {SocialMedia.map((item, index) => (
                       <li key={index} className="list-inline-item">
@@ -284,11 +284,6 @@ const Footer = () => {
             </div>
           </div>
         </footer>
-        {/* Scroll up button */}
-        <button className="scroll-up-btn" onClick={useScrollToTop}>
-          ↑
-        </button>
-
         {/* Scroll down button */}
         <button className="scroll-down-btn" onClick={scrollToBottom}>
           ↓
